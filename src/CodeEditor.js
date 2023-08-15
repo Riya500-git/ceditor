@@ -7,8 +7,18 @@ function CodeEditor() {
   const [code, setCode] = useState('');
   const [logs, setLogs] = useState([]);
 
-  const handleRunClick = () => {
+  const handleRunClick  = async () => {
     setLogs([...logs, 'Running the code...']);
+
+    try {
+      const response = await fetch('/api/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+    }
   };
 
   return (

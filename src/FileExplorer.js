@@ -5,14 +5,30 @@ function FileExplorer() {
   const [files, setFiles] = useState(['example.py', 'script.js']);
   const [fileName, setFileName] = useState('');
 
-  const handleFileCreate = () => {
-    if (fileName && !files.includes(fileName)) {
-      setFiles([...files, fileName]);
-      setFileName('');
-    } else {
-      alert('File already exists or file name is empty.');
+  const handleFileCreate  = async () => {
+  //   if (fileName && !files.includes(fileName)) {
+  //     setFiles([...files, fileName]);
+  //     setFileName('');
+  //   } else {
+  //     alert('File already exists or file name is empty.');
+  //   }
+  // };
+
+  if (fileName && !files.includes(fileName)) {
+    try {
+      const response = await fetch('/api/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fileName }),
+      });
+    } catch (error) {
     }
-  };
+  } else {
+    alert('File already exists or file name is empty.');
+  }
+};
 
   return (
     <Box w="20%" p={4} borderRight="1px solid gray">
